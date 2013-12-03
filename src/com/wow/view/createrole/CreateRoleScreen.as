@@ -1,4 +1,4 @@
-package com.wow.view.cardsmgr
+package com.wow.view.createrole
 {
 	import ext.wm.feathers.WmPanelScreen;
 	
@@ -7,18 +7,17 @@ package com.wow.view.cardsmgr
 	
 	import starling.events.Event;
 	
-	public class CardsMgrScreen extends WmPanelScreen
+	public class CreateRoleScreen extends WmPanelScreen
 	{
 		private var _normalButton:Button;
-		
-		public function CardsMgrScreen()
+		public function CreateRoleScreen()
 		{
 			super();
 		}
 		
 		override protected function initializeHandler(event:Event):void
 		{
-			this.headerProperties.title = "CardsMgr";
+			this.headerProperties.title = "CreateRole";
 			
 			const verticalLayout:VerticalLayout = new VerticalLayout();
 			verticalLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
@@ -29,24 +28,14 @@ package com.wow.view.cardsmgr
 			this.layout = verticalLayout;
 			
 			this._normalButton = new Button();
-			this._normalButton.label = "Friend Button";
+			this._normalButton.label = "Confirm Button";
 			this._normalButton.addEventListener(Event.TRIGGERED, normalButton_triggeredHandler);
-			this.addChild(this._normalButton);
-			
-			this._normalButton = new Button();
-			this._normalButton.label = "Search Button";
-			this._normalButton.addEventListener(Event.TRIGGERED, normalButton_triggeredHandler2);
 			this.addChild(this._normalButton);
 		}
 		
 		private function normalButton_triggeredHandler(e:Event):void
 		{
-			this.dispatchEventWith("showFriend");
-		}
-		
-		private function normalButton_triggeredHandler2(e:Event):void
-		{
-			this.dispatchEventWith("showSearchFighter");
+			this.dispatchEventWith("showCardMgr");
 		}
 	}
 }

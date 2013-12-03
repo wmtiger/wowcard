@@ -1,8 +1,8 @@
 package com.wow.view.fight
 {
-	import com.wow.view.base.BaseScreen;
+	import ext.wm.feathers.WmPanelScreen;
 	
-	public class BattleFieldScreen extends BaseScreen
+	public class BattleFieldScreen extends WmPanelScreen
 	{
 		public function BattleFieldScreen()
 		{
