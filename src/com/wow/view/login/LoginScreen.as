@@ -1,5 +1,7 @@
 package com.wow.view.login
 {
+	import com.wow.setting.Setting;
+	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
@@ -19,11 +21,9 @@ package com.wow.view.login
 		
 		override protected function initializeHandler(event:Event):void
 		{
-			this.headerProperties.title = "Login";
-			
 			const verticalLayout:VerticalLayout = new VerticalLayout();
 			verticalLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			verticalLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
+			verticalLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			verticalLayout.padding = 20 * this.dpiScale;
 			verticalLayout.gap = 16 * this.dpiScale;
 			verticalLayout.manageVisibility = true;
@@ -37,7 +37,7 @@ package com.wow.view.login
 		
 		private function normalButton_triggeredHandler(e:Event):void
 		{
-			this.dispatchEventWith("showCreateRole");
+			this.dispatchEventWith(Setting.SHOW_CREATE_ROLE);
 		}
 	}
 }

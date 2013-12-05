@@ -1,6 +1,6 @@
 package
 {
-	import com.wow.view.game.MainView;
+	import com.wow.view.game.Game;
 	
 	import flash.display.Loader;
 	import flash.display.Sprite;
@@ -102,7 +102,7 @@ package
 		{
 			Starling.handleLostContext = true;
 			Starling.multitouchEnabled = true;
-			this._starling = new Starling(MainView, this.stage);
+			this._starling = new Starling(Game, this.stage);
 			this._starling.enableErrorChecking = false;
 			this._starling.showStats = true;
 			this._starling.showStatsAt(HAlign.LEFT, VAlign.BOTTOM);

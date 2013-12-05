@@ -1,8 +1,16 @@
 package com.wow.view.friend
 {
+	import com.wow.setting.Setting;
+	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
+	import feathers.controls.List;
+	import feathers.controls.renderers.DefaultListItemRenderer;
+	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.data.ListCollection;
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
 	import feathers.system.DeviceCapabilities;
 	
@@ -13,6 +21,7 @@ package com.wow.view.friend
 	public class FriendScreen extends WmPanelScreen
 	{
 		private var _backButton:Button;
+		private var _list:List;
 		
 		public function FriendScreen()
 		{
@@ -21,21 +30,15 @@ package com.wow.view.friend
 		
 		override protected function initializeHandler(event:Event):void
 		{
-			this.headerProperties.title = "Friend";
+			this.layout = new AnchorLayout();
 			
-			const verticalLayout:VerticalLayout = new VerticalLayout();
-			verticalLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			verticalLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			verticalLayout.padding = 20 * this.dpiScale;
-			verticalLayout.gap = 16 * this.dpiScale;
-			verticalLayout.manageVisibility = true;
-			this.layout = verticalLayout;
+			this.headerProperties.title = "Friend";
 			
 			if(!DeviceCapabilities.isTablet(Starling.current.nativeStage))
 			{
 				this._backButton = new Button();
 				this._backButton.nameList.add(Button.ALTERNATE_NAME_BACK_BUTTON);
-				this._backButton.label = "Back";
+				this._backButton.label = "User";
 				this._backButton.addEventListener(Event.TRIGGERED, backButton_triggeredHandler);
 				
 				this.headerProperties.leftItems = new <DisplayObject>
@@ -45,7 +48,43 @@ package com.wow.view.friend
 				
 				this.backButtonHandler = this.onBackButton;
 			}
+			
+			var items:Array = [];
+			for(var i:int = 0; i < 10; i++)
+			{
+				var item:Object = {text: "Friend " + (i + 1).toString()};
+				items[i] = item;
+			}
+			items.fixed = true;
+			
+			_list = new List();
+			this._list.dataProvider = new ListCollection(items);
+			this._list.typicalItem = {text: "Friend 1000"};
+			this._list.isSelectable = true;
+			//			this._list.allowMultipleSelection = true;// 设置的时候可以多选来删除
+			this._list.hasElasticEdges = true;
+			this._list.clipContent = false;
+			this._list.autoHideBackground = true;
+			this._list.itemRendererFactory = function():IListItemRenderer
+			{
+				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+				renderer.isQuickHitAreaEnabled = true;
+				renderer.labelField = "text";
+				return renderer;
+			};
+			this._list.addEventListener(Event.CHANGE, list_changeHandler);
+			this._list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			this.addChild(this._list);
 		}
+		
+		private function list_changeHandler(event:Event):void
+		{
+			const selectedIndices:Vector.<int> = this._list.selectedIndices;
+			trace("List onChange:", selectedIndices.length > 0 ? selectedIndices : this._list.selectedIndex);
+			this.dispatchEventWith(Setting.SHOW_ONE_FRIEND);
+		}
+		
+		override protected function removeHeader():void {}
 		
 		private function backButton_triggeredHandler(event:Event):void
 		{
@@ -54,7 +93,7 @@ package com.wow.view.friend
 		
 		private function onBackButton():void
 		{
-			this.dispatchEventWith("showCardMgr");
+			this.dispatchEventWith(Setting.SHOW_USER);
 		}
 		
 	}

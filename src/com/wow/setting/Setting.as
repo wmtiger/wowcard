@@ -5,46 +5,57 @@ package com.wow.setting
 		public static const LOGIN:String = "login";
 		public static const CREATE_ROLE:String = "createRole";
 		public static const CARD_MGR:String = "cardMgr";
+		public static const USER:String = "user";
 		public static const FRIEND:String = "friend";
-		public static const SEARCH_FIGHTER:String = "searchFighter";
+		public static const ONE_FRIEND:String = "oneFriend";
+		public static const EDIT_CARD_GROUP:String = "editCardGroup";
 		public static const BATTLE_FIELD:String = "battleField";
-		public static const BATTLE_OVER:String = "battleOver";
+		
+		public static const SHOW_LOGIN:String = "showLogin";
+		public static const SHOW_CREATE_ROLE:String = "showCreateRole";
+		public static const SHOW_CARD_MGR:String = "showCardMgr";
+		public static const SHOW_USER:String = "showUser";
+		public static const SHOW_FRIEND:String = "showFriend";
+		public static const SHOW_ONE_FRIEND:String = "showOneFriend";
+		public static const SHOW_EDIT_CARD_GROUP:String = "showEditCardGroup";
+		public static const SHOW_BATTLE_FIELD:String = "showBattleField";
 		
 		public static const LOGIN_EVENTS:Object =
 			{
-//				showLogin: LOGIN
 				showCreateRole: CREATE_ROLE
 			};
 		public static const CREATE_ROLE_EVENTS:Object =
 			{
-//				showCreateRole: CREATE_ROLE
-				showCardMgr: CARD_MGR
+				showUser: USER
 			};
 		public static const CARD_MGR_EVENTS:Object =
 			{
-//				showCardMgr: CARD_MGR
-				showFriend: FRIEND,
-				showSearchFighter: SEARCH_FIGHTER
+				showUser: USER,
+				showEditCardGroup: EDIT_CARD_GROUP,
+				showBattleField: BATTLE_FIELD
+			};
+		public static const EDIT_CARD_GROUP_EVENTS:Object =
+			{
+				showCardMgr: CARD_MGR,
+				showBattleField: BATTLE_FIELD
+			};
+		public static const USER_EVENTS:Object =
+			{
+				showCardMgr: CARD_MGR,
+				showFriend: FRIEND
 			};
 		public static const FRIEND_EVENTS:Object =
 			{
-				showCardMgr: CARD_MGR
-//				showSearchFighter: SEARCH_FIGHTER
+				showUser: USER,
+				showOneFriend: ONE_FRIEND
 			};
-		public static const SEARCH_FIGHTER_EVENTS:Object =
+		public static const ONE_FRIEND_EVENTS:Object =
 			{
-//				showSearchFighter: SEARCH_FIGHTER
-				showCardMgr: CARD_MGR,
+				showFriend: FRIEND,
 				showBattleField: BATTLE_FIELD
 			};
 		public static const BATTLE_FIELD_EVENTS:Object =
 			{
-//				showBattleField: BATTLE_FIELD
-				showBattleOver: BATTLE_OVER
-			};
-		public static const BATTLE_OVER_EVENTS:Object =
-			{
-//				showBattleOver: BATTLE_OVER
 				showBattleField: BATTLE_FIELD,
 				showCardMgr: CARD_MGR
 			};

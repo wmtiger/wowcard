@@ -1,5 +1,7 @@
-package com.wow.view.search
+package com.wow.view.friend
 {
+	import com.wow.setting.Setting;
+	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
@@ -10,18 +12,16 @@ package com.wow.view.search
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
-	public class SearchFighterScreen extends WmPanelScreen
+	public class OneFriendScreen extends WmPanelScreen
 	{
 		private var _backButton:Button;
-		public function SearchFighterScreen()
+		public function OneFriendScreen()
 		{
 			super();
 		}
 		
 		override protected function initializeHandler(event:Event):void
 		{
-			this.headerProperties.title = "Search";
-			
 			const verticalLayout:VerticalLayout = new VerticalLayout();
 			verticalLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			verticalLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
@@ -30,11 +30,13 @@ package com.wow.view.search
 			verticalLayout.manageVisibility = true;
 			this.layout = verticalLayout;
 			
+			this.headerProperties.title = "OneFriend";
+			
 			if(!DeviceCapabilities.isTablet(Starling.current.nativeStage))
 			{
 				this._backButton = new Button();
 				this._backButton.nameList.add(Button.ALTERNATE_NAME_BACK_BUTTON);
-				this._backButton.label = "Back";
+				this._backButton.label = "Friend";
 				this._backButton.addEventListener(Event.TRIGGERED, backButton_triggeredHandler);
 				
 				this.headerProperties.leftItems = new <DisplayObject>
@@ -53,8 +55,10 @@ package com.wow.view.search
 		
 		private function onBackButton():void
 		{
-			this.dispatchEventWith("showCardMgr");
+			this.dispatchEventWith(Setting.SHOW_FRIEND);
 		}
+		
+		override protected function removeHeader():void {}
 		
 	}
 }

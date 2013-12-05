@@ -1,15 +1,27 @@
 package com.wow.view.cardsmgr
 {
+	import com.wow.setting.Setting;
+	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
-	import feathers.layout.VerticalLayout;
+	import feathers.controls.List;
+	import feathers.controls.renderers.DefaultListItemRenderer;
+	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.data.ListCollection;
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
+	import feathers.system.DeviceCapabilities;
 	
+	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
 	public class CardsMgrScreen extends WmPanelScreen
 	{
-		private var _normalButton:Button;
+		private var _editCardButton:Button;
+		private var _userButton:Button;
+		private var _list:List;
 		
 		public function CardsMgrScreen()
 		{
@@ -18,35 +30,85 @@ package com.wow.view.cardsmgr
 		
 		override protected function initializeHandler(event:Event):void
 		{
-			this.headerProperties.title = "CardsMgr";
+			this.layout = new AnchorLayout();
 			
-			const verticalLayout:VerticalLayout = new VerticalLayout();
-			verticalLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			verticalLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			verticalLayout.padding = 20 * this.dpiScale;
-			verticalLayout.gap = 16 * this.dpiScale;
-			verticalLayout.manageVisibility = true;
-			this.layout = verticalLayout;
+			if(!DeviceCapabilities.isTablet(Starling.current.nativeStage))
+			{
+				this._userButton = new Button();
+				this._userButton.nameList.add(Button.ALTERNATE_NAME_BACK_BUTTON);
+				this._userButton.label = "User";
+				this._userButton.addEventListener(Event.TRIGGERED, userButton_triggeredHandler);
+				
+				this.headerProperties.leftItems = new <DisplayObject>
+					[
+						this._userButton
+					];
+				
+				this.backButtonHandler = this.onUserButton;
+			}
 			
-			this._normalButton = new Button();
-			this._normalButton.label = "Friend Button";
-			this._normalButton.addEventListener(Event.TRIGGERED, normalButton_triggeredHandler);
-			this.addChild(this._normalButton);
+			this.headerProperties.title = "CardMgr";
 			
-			this._normalButton = new Button();
-			this._normalButton.label = "Search Button";
-			this._normalButton.addEventListener(Event.TRIGGERED, normalButton_triggeredHandler2);
-			this.addChild(this._normalButton);
+			this._editCardButton = new Button();
+			this._editCardButton.label = "EditCardGroup";
+			this._editCardButton.addEventListener(Event.TRIGGERED, editCardButton_triggeredHandler);
+			
+			this.headerProperties.rightItems = new <DisplayObject>
+				[
+					this._editCardButton
+				];
+			
+			var items:Array = [];
+			for(var i:int = 0; i < 4; i++)
+			{
+				var item:Object = {text: "CardGroup " + (i + 1).toString()};
+				items[i] = item;
+			}
+			items.fixed = true;
+			
+			_list = new List();
+			this._list.dataProvider = new ListCollection(items);
+			this._list.typicalItem = {text: "CardGroup 1000"};
+			this._list.isSelectable = true;
+//			this._list.allowMultipleSelection = true;// 设置的时候可以多选来删除
+			this._list.hasElasticEdges = true;
+			this._list.clipContent = false;
+			this._list.autoHideBackground = true;
+			this._list.itemRendererFactory = function():IListItemRenderer
+			{
+				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+				renderer.isQuickHitAreaEnabled = true;
+				renderer.labelField = "text";
+				return renderer;
+			};
+			this._list.addEventListener(Event.CHANGE, list_changeHandler);
+			this._list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			this.addChild(this._list);
 		}
 		
-		private function normalButton_triggeredHandler(e:Event):void
+		private function list_changeHandler(event:Event):void
 		{
-			this.dispatchEventWith("showFriend");
+			const selectedIndices:Vector.<int> = this._list.selectedIndices;
+			trace("List onChange:", selectedIndices.length > 0 ? selectedIndices : this._list.selectedIndex);
+			this.dispatchEventWith(Setting.SHOW_EDIT_CARD_GROUP);
 		}
 		
-		private function normalButton_triggeredHandler2(e:Event):void
+		private function onUserButton():void
 		{
-			this.dispatchEventWith("showSearchFighter");
+			this.dispatchEventWith(Setting.SHOW_USER);
 		}
+		
+		private function editCardButton_triggeredHandler(e:Event):void
+		{
+			this.dispatchEventWith(Setting.SHOW_EDIT_CARD_GROUP);
+		}
+		
+		private function userButton_triggeredHandler(e:Event):void
+		{
+			onUserButton();
+		}
+		
+		override protected function removeHeader():void {}
+		
 	}
 }
