@@ -2,11 +2,15 @@ package com.wow.view.login
 {
 	import com.wow.setting.Setting;
 	
+	import ext.wm.feathers.AlertInput;
 	import ext.wm.feathers.WmPanelScreen;
 	
+	import feathers.controls.Alert;
 	import feathers.controls.Button;
+	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	
+	import starling.display.Quad;
 	import starling.events.Event;
 	
 	public class LoginScreen extends WmPanelScreen
@@ -37,7 +41,17 @@ package com.wow.view.login
 		
 		private function normalButton_triggeredHandler(e:Event):void
 		{
-			this.dispatchEventWith(Setting.SHOW_CREATE_ROLE);
+//			this.dispatchEventWith(Setting.SHOW_CREATE_ROLE);
+			Alert.show("input your new CardGroup name", "NewCardGroup", new ListCollection(
+				[
+					{ label: "OK" }
+				]), null,true,true,function():AlertInput{return new AlertInput()},function():Quad
+				{
+					var quad:Quad = new Quad(10, 10, 0x000000);
+					quad.alpha = 0.75;
+					return quad;
+				}
+			);
 		}
 	}
 }

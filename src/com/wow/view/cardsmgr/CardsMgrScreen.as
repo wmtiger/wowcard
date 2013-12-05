@@ -5,9 +5,11 @@ package com.wow.view.cardsmgr
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
+	import feathers.controls.ButtonGroup;
 	import feathers.controls.List;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.core.IFeathersControl;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
@@ -22,6 +24,7 @@ package com.wow.view.cardsmgr
 		private var _editCardButton:Button;
 		private var _userButton:Button;
 		private var _list:List;
+		private var _buttonGroup:ButtonGroup;
 		
 		public function CardsMgrScreen()
 		{
@@ -32,6 +35,61 @@ package com.wow.view.cardsmgr
 		{
 			this.layout = new AnchorLayout();
 			
+			initHeader();
+			initBody();
+			initFooter();
+			
+		}
+		
+		private function initFooter():void
+		{
+			this._buttonGroup = new ButtonGroup();
+			this._buttonGroup.dataProvider = new ListCollection(
+				[
+					{ label: "AddCardGroup", triggered: add_triggeredHandler },
+					{ label: "SeeAllCard", triggered: seeAll_triggeredHandler },
+					{ label: "Fight", triggered: fight_triggeredHandler }
+				]);
+			this._buttonGroup.direction = ButtonGroup.DIRECTION_HORIZONTAL;
+			
+			this.footerFactory = function ():IFeathersControl
+			{
+				return _buttonGroup;
+			}
+		}
+		
+		private function initBody():void
+		{
+			var items:Array = [];
+			for(var i:int = 0; i < 4; i++)
+			{
+				var item:Object = {text: "CardGroup " + (i + 1).toString()};
+				items[i] = item;
+			}
+			items.fixed = true;
+			
+			_list = new List();
+			this._list.dataProvider = new ListCollection(items);
+			this._list.typicalItem = {text: "CardGroup 1000"};
+			this._list.isSelectable = true;
+			//			this._list.allowMultipleSelection = true;// 设置的时候可以多选来删除
+			this._list.hasElasticEdges = true;
+			this._list.clipContent = false;
+			this._list.autoHideBackground = true;
+			this._list.itemRendererFactory = function():IListItemRenderer
+			{
+				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+				renderer.isQuickHitAreaEnabled = true;
+				renderer.labelField = "text";
+				return renderer;
+			};
+			this._list.addEventListener(Event.CHANGE, list_changeHandler);
+			this._list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			this.addChild(this._list);
+		}
+		
+		private function initHeader():void
+		{
 			if(!DeviceCapabilities.isTablet(Starling.current.nativeStage))
 			{
 				this._userButton = new Button();
@@ -58,32 +116,21 @@ package com.wow.view.cardsmgr
 					this._editCardButton
 				];
 			
-			var items:Array = [];
-			for(var i:int = 0; i < 4; i++)
-			{
-				var item:Object = {text: "CardGroup " + (i + 1).toString()};
-				items[i] = item;
-			}
-			items.fixed = true;
+		}
+		
+		private function add_triggeredHandler(event:Event):void
+		{
 			
-			_list = new List();
-			this._list.dataProvider = new ListCollection(items);
-			this._list.typicalItem = {text: "CardGroup 1000"};
-			this._list.isSelectable = true;
-//			this._list.allowMultipleSelection = true;// 设置的时候可以多选来删除
-			this._list.hasElasticEdges = true;
-			this._list.clipContent = false;
-			this._list.autoHideBackground = true;
-			this._list.itemRendererFactory = function():IListItemRenderer
-			{
-				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
-				renderer.isQuickHitAreaEnabled = true;
-				renderer.labelField = "text";
-				return renderer;
-			};
-			this._list.addEventListener(Event.CHANGE, list_changeHandler);
-			this._list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
-			this.addChild(this._list);
+		}
+		
+		private function seeAll_triggeredHandler(event:Event):void
+		{
+			
+		}
+		
+		private function fight_triggeredHandler(event:Event):void
+		{
+			
 		}
 		
 		private function list_changeHandler(event:Event):void

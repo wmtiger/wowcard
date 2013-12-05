@@ -46,7 +46,6 @@ package com.wow.view.user
 				return _friendButton;
 			}
 				
-			this.footerProperties.title = "foot";
 		}
 		
 		private function onCardMgrButton():void
