@@ -26,6 +26,8 @@ package com.wow.view.cardsmgr
 		private var _list:List;
 		private var _buttonGroup:ButtonGroup;
 		
+		public var selectedCardGroup:Object;
+		
 		public function CardsMgrScreen()
 		{
 			super();
@@ -130,13 +132,15 @@ package com.wow.view.cardsmgr
 		
 		private function fight_triggeredHandler(event:Event):void
 		{
-			
+			this.dispatchEventWith(Setting.SHOW_BATTLE_FIELD);
 		}
 		
 		private function list_changeHandler(event:Event):void
 		{
 			const selectedIndices:Vector.<int> = this._list.selectedIndices;
 			trace("List onChange:", selectedIndices.length > 0 ? selectedIndices : this._list.selectedIndex);
+			selectedCardGroup.idx = _list.selectedIndex;
+			selectedCardGroup.label = _list.selectedItem.text;
 			this.dispatchEventWith(Setting.SHOW_EDIT_CARD_GROUP);
 		}
 		
@@ -147,7 +151,7 @@ package com.wow.view.cardsmgr
 		
 		private function editCardButton_triggeredHandler(e:Event):void
 		{
-			this.dispatchEventWith(Setting.SHOW_EDIT_CARD_GROUP);
+			
 		}
 		
 		private function userButton_triggeredHandler(e:Event):void

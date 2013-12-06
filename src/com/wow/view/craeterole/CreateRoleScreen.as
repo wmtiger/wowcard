@@ -1,5 +1,6 @@
 package com.wow.view.craeterole
 {
+	import com.wow.mgr.GameMgr;
 	import com.wow.setting.Setting;
 	
 	import ext.wm.feathers.WmPanelScreen;
@@ -48,7 +49,11 @@ package com.wow.view.craeterole
 		
 		private function normalButton_triggeredHandler(e:Event):void
 		{
-			this.dispatchEventWith(Setting.SHOW_USER);
+			if(_input.text.length > 0 && _input.text != _input.prompt)
+			{
+				GameMgr.instance.saveDataToSetting("",_input.text);
+				this.dispatchEventWith(Setting.SHOW_USER);
+			}
 		}
 	}
 }

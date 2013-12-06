@@ -45,9 +45,10 @@ package com.wow.view.game
 			
 			this._navigator.addScreen(Setting.CREATE_ROLE, new ScreenNavigatorItem(CreateRoleScreen, Setting.CREATE_ROLE_EVENTS));
 
-			this._navigator.addScreen(Setting.CARD_MGR, new ScreenNavigatorItem(CardsMgrScreen, Setting.CARD_MGR_EVENTS));
+			const idx:Object = {};
+			this._navigator.addScreen(Setting.CARD_MGR, new ScreenNavigatorItem(CardsMgrScreen, Setting.CARD_MGR_EVENTS, {selectedCardGroup:idx}));
 			
-			this._navigator.addScreen(Setting.EDIT_CARD_GROUP, new ScreenNavigatorItem(EditCardGroupScreen, Setting.EDIT_CARD_GROUP_EVENTS));
+			this._navigator.addScreen(Setting.EDIT_CARD_GROUP, new ScreenNavigatorItem(EditCardGroupScreen, Setting.EDIT_CARD_GROUP_EVENTS, {selectedCardGroup:idx}));
 
 			this._navigator.addScreen(Setting.USER, new ScreenNavigatorItem(UserScreen, Setting.USER_EVENTS));
 

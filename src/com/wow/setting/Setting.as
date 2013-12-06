@@ -22,7 +22,8 @@ package com.wow.setting
 		
 		public static const LOGIN_EVENTS:Object =
 			{
-				showCreateRole: CREATE_ROLE
+				showCreateRole: CREATE_ROLE,
+				showUser: USER
 			};
 		public static const CREATE_ROLE_EVENTS:Object =
 			{
@@ -43,6 +44,7 @@ package com.wow.setting
 			{
 				showCardMgr: CARD_MGR,
 				showFriend: FRIEND
+//				showBattleField: BATTLE_FIELD
 			};
 		public static const FRIEND_EVENTS:Object =
 			{
