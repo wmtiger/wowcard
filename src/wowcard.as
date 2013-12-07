@@ -19,7 +19,7 @@ package
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
 	
-	[SWF(width="960",height="640",frameRate="60",backgroundColor="#4a4137")]
+	[SWF(width="960",height="640",frameRate="30",backgroundColor="#4a4137")]
 	public class wowcard extends Sprite
 	{
 		private var _starling:Starling;
