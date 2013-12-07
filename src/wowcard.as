@@ -28,7 +28,7 @@ package
 		
 		public function wowcard()
 		{
-			super();
+			super();//
 			
 			if(this.stage)
 			{
