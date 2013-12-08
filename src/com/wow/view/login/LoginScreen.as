@@ -42,6 +42,8 @@ package com.wow.view.login
 		
 		private function normalButton_triggeredHandler(e:Event):void
 		{
+			this.dispatchEventWith(Setting.SHOW_BATTLE_FIELD);
+			return;
 			if(GameMgr.instance.getDataFromSetting() == null)
 			{
 				this.dispatchEventWith(Setting.SHOW_CREATE_ROLE);

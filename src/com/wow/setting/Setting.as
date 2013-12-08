@@ -23,6 +23,7 @@ package com.wow.setting
 		public static const LOGIN_EVENTS:Object =
 			{
 				showCreateRole: CREATE_ROLE,
+				showBattleField: BATTLE_FIELD,
 				showUser: USER
 			};
 		public static const CREATE_ROLE_EVENTS:Object =

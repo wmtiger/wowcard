@@ -10,6 +10,8 @@ package com.wow.view.fight
 	public class BattleFieldScreen extends WmPanelScreen
 	{
 		private var _bg:ImageLoader;
+		private var _myHandCards:BattleField;
+		private var _enemyHandCards:BattleField;
 		
 		public function BattleFieldScreen()
 		{
@@ -20,9 +22,16 @@ package com.wow.view.fight
 		{
 			this.layout = new AnchorLayout();
 			
-			_bg = new ImageLoader();
-			addChild(_bg);
-			_bg.source = "assets/images/battlebg.jpg";
+//			_bg = new ImageLoader();
+//			addChild(_bg);
+//			_bg.source = "assets/images/battlebg.jpg";
+			
+			_enemyHandCards = new BattleField();
+			addChild(_enemyHandCards);
+			
+			_myHandCards = new BattleField();
+			addChild(_myHandCards);
+			_myHandCards.y = _enemyHandCards.height;
 		}
 		
 	}
