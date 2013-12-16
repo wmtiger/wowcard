@@ -20,6 +20,9 @@ package com.wow.setting
 		public static const SHOW_EDIT_CARD_GROUP:String = "showEditCardGroup";
 		public static const SHOW_BATTLE_FIELD:String = "showBattleField";
 		
+		public static var STAGE_WIDTH:int;
+		public static var STAGE_HEIGHT:int;
+		
 		public static const LOGIN_EVENTS:Object =
 			{
 				showCreateRole: CREATE_ROLE,

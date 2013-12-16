@@ -1,12 +1,10 @@
 package com.wow.view.fight
 {
-	import com.wow.view.comps.CardSmall;
-	
-	import ext.wm.starling.WmSprite;
+	import ext.wm.feathers.FeaSprite;
 	
 	import starling.display.Quad;
 	
-	public class BattleField extends WmSprite
+	public class BattleField extends FeaSprite
 	{
 		protected var _hands:HandCards;
 		
@@ -15,24 +13,26 @@ package com.wow.view.fight
 			super();
 		}
 		
-		override protected function init():void
+		protected function createQuad():void
+		{
+			var q:Quad = new Quad(width, height, 0x7fa45f);
+			q.alpha = 0.2;
+			addChild(q);
+		}
+		
+		override protected function initialize():void
 		{
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight / 2;
-			const q:Quad = new Quad(width, height, 0x7fa45f);
-			q.alpha = 0;
-			addChild(q);
+			createQuad();
 			
-			_hands = new HandCards();
-			_hands.width = this.width;
+			_hands = new HandCards(width, 120);
 			addChild(_hands);
-			
-			//test
-			for(var i:int = 0;i < 4; i++)
-			{
-				var cs:CardSmall = new CardSmall();
-				_hands.addChild(cs);
-			}
+		}
+		
+		protected function flushHands():void
+		{
+			_hands.flush();
 		}
 		
 	}

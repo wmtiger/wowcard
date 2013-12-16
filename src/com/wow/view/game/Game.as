@@ -33,6 +33,9 @@ package com.wow.view.game
 		
 		private function initializeHandler(event:Event):void
 		{
+			Setting.STAGE_WIDTH = stage.stageWidth;
+			Setting.STAGE_HEIGHT = stage.stageHeight;
+			
 			new WowCardTheme();
 			
 			this._navigator = new ScreenNavigator();

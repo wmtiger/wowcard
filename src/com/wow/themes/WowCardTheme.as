@@ -24,6 +24,13 @@
  */
 package com.wow.themes
 {
+	import com.wow.view.comps.CardSmall;
+	
+	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+	
 	import feathers.controls.Alert;
 	import feathers.controls.Button;
 	import feathers.controls.ButtonGroup;
@@ -72,12 +79,7 @@ package com.wow.themes
 	import feathers.system.DeviceCapabilities;
 	import feathers.textures.Scale3Textures;
 	import feathers.textures.Scale9Textures;
-
-	import flash.display.BitmapData;
-	import flash.geom.Rectangle;
-	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -94,6 +96,12 @@ package com.wow.themes
 
 		[Embed(source="/assets/images/metalworks.xml",mimeType="application/octet-stream")]
 		protected static const ATLAS_XML:Class;
+		
+		[Embed(source="/assets/images/ui/ui.png")]
+		protected static const ATLAS_IMAGE2:Class;
+
+		[Embed(source="/assets/images/ui/ui.xml",mimeType="application/octet-stream")]
+		protected static const ATLAS_XML2:Class;
 
 		[Embed(source="/assets/fonts/SourceSansPro-Regular.ttf",fontName="SourceSansPro",mimeType="application/x-font",embedAsCFF="false")]
 		protected static const SOURCE_SANS_PRO_REGULAR:Class;
@@ -208,7 +216,9 @@ package com.wow.themes
 		protected var smallLightTextFormatCentered:TextFormat;
 
 		protected var atlas:TextureAtlas;
+		protected var atlas2:TextureAtlas;
 		protected var atlasBitmapData:BitmapData;
+		protected var atlasBitmapData2:BitmapData;
 		protected var headerBackgroundSkinTexture:Texture;
 		protected var backgroundSkinTextures:Scale9Textures;
 		protected var backgroundInsetSkinTextures:Scale9Textures;
@@ -272,6 +282,16 @@ package com.wow.themes
 			if(this.root)
 			{
 				this.root.removeEventListener(Event.ADDED_TO_STAGE, root_addedToStageHandler);
+			}
+			if(this.atlas2)
+			{
+				this.atlas2.dispose();
+				this.atlas2 = null;
+			}
+			if(this.atlasBitmapData2)
+			{
+				this.atlasBitmapData2.dispose();
+				this.atlasBitmapData2 = null;
 			}
 			if(this.atlas)
 			{
@@ -346,6 +366,21 @@ package com.wow.themes
 			PopUpManager.overlayFactory = popUpOverlayFactory;
 			Callout.stagePaddingTop = Callout.stagePaddingRight = Callout.stagePaddingBottom =
 				Callout.stagePaddingLeft = 16 * this.scale;
+
+			const atlasBitmapData2:BitmapData = (new ATLAS_IMAGE2()).bitmapData;
+			this.atlas2 = new TextureAtlas(Texture.fromBitmapData(atlasBitmapData2, false), XML(new ATLAS_XML2()));
+			if(Starling.handleLostContext)
+			{
+				this.atlasBitmapData2 = atlasBitmapData2;
+			}
+			else
+			{
+				atlasBitmapData2.dispose();
+			}
+			//卡牌的东西在这里
+			this.setInitializerForClassAndSubclasses(CardSmall, cardSmallInitializer);
+			UIAssets.instance.cardSmallFaceTexture = this.atlas2.getTexture("sf");
+			UIAssets.instance.cardSmallBackTexture = this.atlas2.getTexture("sb");
 
 			const atlasBitmapData:BitmapData = (new ATLAS_IMAGE()).bitmapData;
 			this.atlas = new TextureAtlas(Texture.fromBitmapData(atlasBitmapData, false), XML(new ATLAS_XML()));
@@ -530,6 +565,11 @@ package com.wow.themes
 		}
 
 		protected function nothingInitializer(target:DisplayObject):void {}
+
+		protected function cardSmallInitializer(cs:CardSmall):void
+		{
+			cs.backgroundSkin = new Image(this.atlas2.getTexture("sf"));
+		}
 
 		protected function screenInitializer(screen:Screen):void
 		{

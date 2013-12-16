@@ -1,10 +1,12 @@
 package com.wow.view.comps
 {
+	import com.wow.themes.UIAssets;
+	
 	import ext.wm.feathers.FeaSprite;
 	
 	import feathers.controls.ImageLoader;
 	
-	import starling.display.Quad;
+	import starling.display.Image;
 	import starling.events.Event;
 	import starling.text.TextField;
 	
@@ -13,21 +15,35 @@ package com.wow.view.comps
 		private var _costTf:TextField;
 		private var _attackTf:TextField;
 		private var _hpTf:TextField;
+		private var _imgContent:ImageLoader;
+		protected var _bg:Image;
+		private var _type:int;//type = 0 为背面，type ＝ 1 为正面
 		
-		public function CardSmall()
+		public function CardSmall(type:int = 0)
 		{
 			super();
+			_type = type;
+			if(type == 1)
+			{
+				_bg = new Image(UIAssets.instance.cardSmallFaceTexture);
+			}
+			else 
+			{
+				_bg = new Image(UIAssets.instance.cardSmallBackTexture);
+			}
+			addChild(_bg);
 		}
 		
 		override protected function initialize():void
 		{
-			var q:Quad = new Quad(80,115);
-			q.alpha = 0;
-			addChild(q);
-			var img:ImageLoader = new ImageLoader();
-			addChild(img);
-			img.addEventListener(Event.COMPLETE, onComp);
-			img.source = "/assets/images/cards/sf.jpg";
+			if(_type == 1)
+			{
+				_imgContent = new ImageLoader();
+				addChild(_imgContent);
+				_imgContent.x = 12;
+				_imgContent.y = 25;
+				_imgContent.source = "/assets/images/cards/small/jbubing.jpg";
+			}
 		}
 		
 		private function onComp(e:Event):void
