@@ -8,6 +8,9 @@ package com.wow.view.comps
 	
 	import starling.display.Image;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import starling.text.TextField;
 	
 	public class CardSmall extends FeaSprite
@@ -32,6 +35,24 @@ package com.wow.view.comps
 				_bg = new Image(UIAssets.instance.cardSmallBackTexture);
 			}
 			addChild(_bg);
+			addEventListener(TouchEvent.TOUCH, onTouch);
+		}
+		
+		protected function onTouch(e:TouchEvent):void
+		{
+			var t:Touch = e.getTouch(stage);
+			if (t && t.phase == TouchPhase.ENDED)
+			{
+				clickCardSmall();
+			}
+		}
+		
+		protected function clickCardSmall():void
+		{
+			if(_type == 1)
+			{
+				trace("show detail card's info panel");
+			}
 		}
 		
 		override protected function initialize():void
