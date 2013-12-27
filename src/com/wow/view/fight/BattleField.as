@@ -7,6 +7,7 @@ package com.wow.view.fight
 	public class BattleField extends FeaSprite
 	{
 		protected var _hands:HandCards;
+		protected var _field:ArmyField;
 		
 		public function BattleField()
 		{
@@ -28,11 +29,19 @@ package com.wow.view.fight
 			
 			_hands = new HandCards(width, 120);
 			addChild(_hands);
+			
+			_field = new ArmyField(width, 120);
+			addChild(_field);
 		}
 		
 		protected function flushHands():void
 		{
 			_hands.flush();
+		}
+		
+		protected function flushArmy():void
+		{
+			_field.flush();
 		}
 		
 	}

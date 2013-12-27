@@ -19,6 +19,8 @@ package com.wow.themes
 		
 		public var cardSmallFaceTexture:Texture;
 		public var cardSmallBackTexture:Texture;
+		public var cardLargeFaceTexture:Texture;
+		public var cardLargeBackTexture:Texture;
 
 	}
 }

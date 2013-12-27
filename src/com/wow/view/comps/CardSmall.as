@@ -5,6 +5,7 @@ package com.wow.view.comps
 	import ext.wm.feathers.FeaSprite;
 	
 	import feathers.controls.ImageLoader;
+	import feathers.core.PopUpManager;
 	
 	import starling.display.Image;
 	import starling.events.Event;
@@ -52,6 +53,25 @@ package com.wow.view.comps
 			if(_type == 1)
 			{
 				trace("show detail card's info panel");
+				var cip:CardInfoPanel = new CardInfoPanel();
+				cip.setCallBack(usefun, nofun);
+				PopUpManager.addPopUp(cip);
+				
+				function usefun():void
+				{
+					deleteCip();
+				}
+				
+				function nofun():void
+				{
+					deleteCip();
+				}
+				
+				function deleteCip():void
+				{
+					PopUpManager.removePopUp(cip,true);
+					cip = null;
+				}
 			}
 		}
 		

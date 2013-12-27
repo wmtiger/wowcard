@@ -381,6 +381,8 @@ package com.wow.themes
 			this.setInitializerForClassAndSubclasses(CardSmall, cardSmallInitializer);
 			UIAssets.instance.cardSmallFaceTexture = this.atlas2.getTexture("sf");
 			UIAssets.instance.cardSmallBackTexture = this.atlas2.getTexture("sb");
+			UIAssets.instance.cardLargeFaceTexture = this.atlas2.getTexture("f");
+			UIAssets.instance.cardLargeBackTexture = this.atlas2.getTexture("b");
 
 			const atlasBitmapData:BitmapData = (new ATLAS_IMAGE()).bitmapData;
 			this.atlas = new TextureAtlas(Texture.fromBitmapData(atlasBitmapData, false), XML(new ATLAS_XML()));

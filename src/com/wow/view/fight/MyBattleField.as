@@ -28,6 +28,8 @@ package com.wow.view.fight
 		override protected function updateLayout():void
 		{
 			_hands.y = height - 80;
+			
+			_field.y = 40;
 		}
 	}
 }

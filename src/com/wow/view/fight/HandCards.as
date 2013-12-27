@@ -41,6 +41,7 @@ package com.wow.view.fight
 			for(var i:int = 0; i < l; i++)
 			{
 				getChildAt(i).x = idx + i * (_smallCardWidth + gap);
+//				getChildAt(i).y = 0;
 			}
 		}
 
