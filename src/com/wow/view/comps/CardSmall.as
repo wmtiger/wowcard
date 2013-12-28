@@ -1,6 +1,9 @@
 package com.wow.view.comps
 {
+	import com.wow.common.constant.Constant;
+	import com.wow.common.utils.NormalUtil;
 	import com.wow.themes.UIAssets;
+	import com.wow.view.fight.IBattleField;
 	
 	import ext.wm.feathers.FeaSprite;
 	
@@ -14,20 +17,29 @@ package com.wow.view.comps
 	import starling.events.TouchPhase;
 	import starling.text.TextField;
 	
-	public class CardSmall extends FeaSprite
+	public class CardSmall extends FeaSprite implements ICardSmall
 	{
-		private var _costTf:TextField;
-		private var _attackTf:TextField;
-		private var _hpTf:TextField;
-		private var _imgContent:ImageLoader;
+		protected var _costTf:TextField;
+		protected var _attackTf:TextField;
+		protected var _hpTf:TextField;
+		protected var _imgContent:ImageLoader;
 		protected var _bg:Image;
-		private var _type:int;//type = 0 为背面，type ＝ 1 为正面
+		protected var _type:int;//type = 0 为背面，type ＝ 1 为正面
+		protected var _data:Object;
+		protected var _handle:IBattleField;
 		
-		public function CardSmall(type:int = 0)
+		public function CardSmall(handle:IBattleField, type:int = 0)
 		{
+			_handle = handle;
 			super();
 			_type = type;
-			if(type == 1)
+			init();
+			addEventListener(TouchEvent.TOUCH, onTouch);
+		}
+		
+		protected function init():void
+		{
+			if(_type == 1)
 			{
 				_bg = new Image(UIAssets.instance.cardSmallFaceTexture);
 			}
@@ -36,7 +48,6 @@ package com.wow.view.comps
 				_bg = new Image(UIAssets.instance.cardSmallBackTexture);
 			}
 			addChild(_bg);
-			addEventListener(TouchEvent.TOUCH, onTouch);
 		}
 		
 		protected function onTouch(e:TouchEvent):void
@@ -53,12 +64,13 @@ package com.wow.view.comps
 			if(_type == 1)
 			{
 				trace("show detail card's info panel");
-				var cip:CardInfoPanel = new CardInfoPanel();
+				var cip:CardInfoPanel = new CardInfoPanel(data);
 				cip.setCallBack(usefun, nofun);
 				PopUpManager.addPopUp(cip);
 				
 				function usefun():void
 				{
+					_handle.addToArmyField(data.id, Constant.FROM_HAND);
 					deleteCip();
 				}
 				
@@ -81,10 +93,20 @@ package com.wow.view.comps
 			{
 				_imgContent = new ImageLoader();
 				addChild(_imgContent);
-				_imgContent.x = 12;
-				_imgContent.y = 25;
-				_imgContent.source = "/assets/images/cards/small/jbubing.jpg";
+				setImgXY();
+				setImg();
 			}
+		}
+		
+		protected function setImgXY():void
+		{
+			_imgContent.x = 12;
+			_imgContent.y = 25;
+		}
+		
+		protected function setImg():void
+		{
+			_imgContent.source = NormalUtil.getCardImgByTid(data.tid, Constant.CARD_SIZE_SMALL);
 		}
 		
 		private function onComp(e:Event):void
@@ -101,5 +123,16 @@ package com.wow.view.comps
 			_hpTf.x = width - _hpTf.width;
 			_hpTf.y = height - _hpTf.height;
 		}
+
+		public function get data():Object
+		{
+			return _data;
+		}
+
+		public function set data(value:Object):void
+		{
+			_data = value;
+		}
+
 	}
 }

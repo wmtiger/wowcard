@@ -15,9 +15,11 @@ package com.wow.view.comps
 		private var _cancelBtn:Button;
 		private var _useFun:Function;
 		private var _cancelFun:Function;
+		private var _data:Object;
 		
-		public function CardInfoPanel()
+		public function CardInfoPanel(d:Object)
 		{
+			_data = d;
 			super();
 			
 			_bg = new Quad(360,600);
@@ -27,6 +29,7 @@ package com.wow.view.comps
 		override protected function initialize():void
 		{
 			_cardShow = new CardLarge();
+			_cardShow.data = _data;
 			addChild(_cardShow);
 			_cardShow.x = 20;
 			_cardShow.y = 20;
@@ -69,5 +72,6 @@ package com.wow.view.comps
 				_cancelFun();
 			}
 		}
+
 	}
 }

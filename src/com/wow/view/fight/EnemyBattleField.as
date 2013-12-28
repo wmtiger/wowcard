@@ -1,6 +1,6 @@
 package com.wow.view.fight
 {
-	import com.wow.view.comps.CardSmall;
+	import com.wow.common.model.CardModel;
 	
 	import starling.display.Quad;
 
@@ -14,7 +14,7 @@ package com.wow.view.fight
 		override protected function initialize():void
 		{
 			super.initialize();
-			test();
+			initHand();
 		}
 		
 		override protected function createQuad():void
@@ -24,19 +24,31 @@ package com.wow.view.fight
 			addChild(q);
 		}
 		
-		private function test():void
+		private function initHand():void
 		{
-			for(var i:int = 0;i < 8; i++)
-			{
-				var cs:CardSmall = new CardSmall(0);
-				_hands.addChild(cs);
-			}
-			flushHands();
+			addToHands(4);
+		}
+		
+		override protected function addHands(num:int = 1, from:int = 0, id:int = -1):void
+		{
+			CardModel.instance.addOtherHand(num, from,id);
+		}
+		
+		override protected function getHands():Array
+		{
+			return CardModel.instance.getOtherHands();
+		}
+		
+		override protected function addField(id:int, from:int = 1):void
+		{
+			CardModel.instance.addOtherField(id, from);
 		}
 		
 		override protected function updateLayout():void
 		{
 			_hands.y = -40;
+			
+			_field.y = height - 60 - 80;
 		}
 	}
 }

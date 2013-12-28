@@ -7,6 +7,7 @@ package com.wow.view.fight
 		{
 			super(w, h);
 			gap = 10;
+			_smallCardWidth = 60;
 		}
 	}
 }

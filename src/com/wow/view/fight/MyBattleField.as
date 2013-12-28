@@ -1,5 +1,6 @@
 package com.wow.view.fight
 {
+	import com.wow.common.model.CardModel;
 	import com.wow.view.comps.CardSmall;
 
 	public class MyBattleField extends BattleField
@@ -12,24 +13,50 @@ package com.wow.view.fight
 		override protected function initialize():void
 		{
 			super.initialize();
-			test();
+			initHand();
 		}
 		
-		private function test():void
+		private function initHand():void
 		{
-			for(var i:int = 0;i < 8; i++)
-			{
-				var cs:CardSmall = new CardSmall(1);
-				_hands.addChild(cs);
-			}
-			flushHands();
+			addToHands(4);
 		}
 		
 		override protected function updateLayout():void
 		{
 			_hands.y = height - 80;
 			
-			_field.y = 40;
+			_field.y = 60;
 		}
+		
+		override protected function createCardSmall():CardSmall
+		{
+			return new CardSmall(this, 1);
+		}
+		
+		override protected function addHands(num:int = 1, from:int = 0, id:int = -1):void
+		{
+			CardModel.instance.addMyHand(num, from,id);
+		}
+		
+		override protected function getHands():Array
+		{
+			return CardModel.instance.getMyHands();
+		}
+		
+		override protected function addField(id:int, from:int = 1):void
+		{
+			CardModel.instance.addMyField(id, from);
+		}
+		
+		override public function removeFromArmyField(id:int):void
+		{
+			super.removeFromArmyField(id);
+		}
+		
+		override public function removeFromHands(id:int):void
+		{
+			super.removeFromHands(id);
+		}
+		
 	}
 }

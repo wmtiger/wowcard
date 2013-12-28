@@ -570,7 +570,7 @@ package com.wow.themes
 
 		protected function cardSmallInitializer(cs:CardSmall):void
 		{
-			cs.backgroundSkin = new Image(this.atlas2.getTexture("sf"));
+//			cs.backgroundSkin = new Image(this.atlas2.getTexture("sf"));
 		}
 
 		protected function screenInitializer(screen:Screen):void
