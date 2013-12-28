@@ -1,6 +1,10 @@
 package com.wow.view.craeterole
 {
-	import com.wow.mgr.GameMgr;
+	import com.wow.common.model.UserModel;
+	import com.wow.evt.WmEvent;
+	import com.wow.mgr.EvtMgr;
+	import com.wow.net.SocketCmd;
+	import com.wow.net.SocketService;
 	import com.wow.setting.Setting;
 	
 	import ext.wm.feathers.WmPanelScreen;
@@ -16,6 +20,7 @@ package com.wow.view.craeterole
 	{
 		private var _normalButton:Button;
 		private var _input:TextInput;
+		private var _inputPwd:TextInput;
 		
 		public function CreateRoleScreen()
 		{
@@ -33,7 +38,7 @@ package com.wow.view.craeterole
 			this.layout = verticalLayout;
 			
 			this._input = new TextInput();
-			this._input.prompt = "Type Something";
+			this._input.prompt = "Type Your Name";
 			this._input.isEditable = true;
 			const inputLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			inputLayoutData.horizontalCenter = 0;
@@ -41,8 +46,18 @@ package com.wow.view.craeterole
 			this._input.layoutData = inputLayoutData;
 			this.addChild(this._input);
 			
+			this._inputPwd = new TextInput();
+			this._inputPwd.prompt = "";
+			this._inputPwd.isEditable = true;
+			this._inputPwd.displayAsPassword = true;
+			const inputLayoutData1:AnchorLayoutData = new AnchorLayoutData();
+			inputLayoutData1.horizontalCenter = 0;
+			inputLayoutData1.verticalCenter = 0;
+			this._inputPwd.layoutData = inputLayoutData1;
+			this.addChild(this._inputPwd);
+			
 			this._normalButton = new Button();
-			this._normalButton.label = "Submit";
+			this._normalButton.label = "Rigister";
 			this._normalButton.addEventListener(Event.TRIGGERED, normalButton_triggeredHandler);
 			this.addChild(this._normalButton);
 		}
@@ -51,9 +66,35 @@ package com.wow.view.craeterole
 		{
 			if(_input.text.length > 0 && _input.text != _input.prompt)
 			{
-				GameMgr.instance.saveDataToSetting("",_input.text);
-				this.dispatchEventWith(Setting.SHOW_USER);
+				EvtMgr.instance.addEventListener(SocketCmd.SOCKET_CONNECTED, onConnected);
+				SocketService.instance.connect();
 			}
 		}
+		
+		private function onConnected(e:WmEvent):void 
+		{
+			SocketService.instance.send(SocketCmd.REGISTER, { username:_input.text + "", password:_inputPwd.text+"" }, showUserView );
+		}
+		
+		private function showUserView(obj:Object):void
+		{
+			if(obj.state == 1)
+			{
+				trace("注册成功");
+				UserModel.instance.userVO.userid = obj.userid;
+				this.dispatchEventWith(Setting.SHOW_USER);
+			}
+			else if(obj.state == 2)
+			{
+				trace("注册失败");
+			}
+		}
+		
+		override public function dispose():void
+		{
+			EvtMgr.instance.removeEventListener(SocketCmd.SOCKET_CONNECTED, onConnected);
+			super.dispose();
+		}
+		
 	}
 }

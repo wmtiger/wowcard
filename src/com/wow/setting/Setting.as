@@ -47,8 +47,8 @@ package com.wow.setting
 		public static const USER_EVENTS:Object =
 			{
 				showCardMgr: CARD_MGR,
-				showFriend: FRIEND
-//				showBattleField: BATTLE_FIELD
+				showFriend: FRIEND,
+				showBattleField: BATTLE_FIELD
 			};
 		public static const FRIEND_EVENTS:Object =
 			{

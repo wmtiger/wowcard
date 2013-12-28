@@ -1,5 +1,8 @@
 package com.wow.view.game
 {
+	import com.wow.mgr.EvtMgr;
+	import com.wow.net.SocketCmd;
+	import com.wow.net.SocketService;
 	import com.wow.setting.Setting;
 	import com.wow.themes.WowCardTheme;
 	import com.wow.view.cardsmgr.CardsMgrScreen;
@@ -35,6 +38,8 @@ package com.wow.view.game
 		{
 			Setting.STAGE_WIDTH = stage.stageWidth;
 			Setting.STAGE_HEIGHT = stage.stageHeight;
+			
+			SocketService.instance.init("192.168.1.102", 8888);
 			
 			new WowCardTheme();
 			

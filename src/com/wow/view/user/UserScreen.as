@@ -53,8 +53,8 @@ package com.wow.view.user
 			this._buttonGroup = new ButtonGroup();
 			this._buttonGroup.dataProvider = new ListCollection(
 				[
-					{ label: "Friend", triggered: friend_triggeredHandler }
-//					{ label: "SpeedFight", triggered: speedFight_triggeredHandler }
+					{ label: "Friend", triggered: friend_triggeredHandler },
+					{ label: "SpeedFight", triggered: speedFight_triggeredHandler }
 				]);
 			this._buttonGroup.direction = ButtonGroup.DIRECTION_HORIZONTAL;
 			

@@ -2,12 +2,16 @@ package com.wow.view.fight
 {
 	import com.wow.common.model.CardModel;
 	import com.wow.mgr.BattleMgr;
+	import com.wow.net.SocketCmd;
+	import com.wow.net.SocketService;
+	import com.wow.view.comps.SearchFighterPanel;
 	
 	import flash.utils.setTimeout;
 	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
+	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	
 	import flashx.textLayout.tlf_internal;
@@ -31,6 +35,21 @@ package com.wow.view.fight
 		{
 			this.layout = new AnchorLayout();
 			
+			var sfp:SearchFighterPanel = new SearchFighterPanel();
+			PopUpManager.addPopUp(sfp);
+			SocketService.instance.send(SocketCmd.ROOM_JOIN, null, function (obj:Object):void 
+			{
+				if (obj.state == 1) 
+				{
+					PopUpManager.removePopUp(sfp);
+					startFight();
+				}
+			});
+		}
+		
+		public function startFight():void
+		{
+			
 			initCard();
 			
 			_ebf = new EnemyBattleField();
@@ -43,9 +62,9 @@ package com.wow.view.fight
 			_nextRound = new Button();
 			_nextRound.label = "NextRound";
 			addChild(_nextRound);
-			_nextRound.width = 140;
+			_nextRound.width = 160;
 			_nextRound.height = 50;
-			_nextRound.x = stage.stageWidth - 140;
+			_nextRound.x = stage.stageWidth - 160;
 			_nextRound.y = stage.stageHeight - 50 >> 1;
 			_nextRound.addEventListener(Event.TRIGGERED, onTriRound);
 			
