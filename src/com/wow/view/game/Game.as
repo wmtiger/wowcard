@@ -1,5 +1,6 @@
 package com.wow.view.game
 {
+	import com.wow.common.utils.CfgUtil;
 	import com.wow.mgr.EvtMgr;
 	import com.wow.net.SocketCmd;
 	import com.wow.net.SocketService;
@@ -40,6 +41,7 @@ package com.wow.view.game
 			Setting.STAGE_HEIGHT = stage.stageHeight;
 			
 			SocketService.instance.init("192.168.1.102", 8888);
+			CfgUtil.testCardTemp();//test
 			
 			new WowCardTheme();
 			

@@ -78,21 +78,14 @@ package com.wow.view.login
 		
 		private function normalButton_triggeredHandler(e:Event):void
 		{
+			
+			this.dispatchEventWith(Setting.SHOW_USER);//test
+//			this.dispatchEventWith(Setting.SHOW_BATTLE_FIELD);//test
+			return;
 			if(_input.text.length > 0 && _input.text != _input.prompt)
 			{
 				EvtMgr.instance.addEventListener(SocketCmd.SOCKET_CONNECTED, onConnected);
 				SocketService.instance.connect();
-			}
-			
-//			this.dispatchEventWith(Setting.SHOW_BATTLE_FIELD);
-			return;
-			if(GameMgr.instance.getDataFromSetting() == null)
-			{
-				this.dispatchEventWith(Setting.SHOW_CREATE_ROLE);
-			}
-			else
-			{
-				this.dispatchEventWith(Setting.SHOW_USER);
 			}
 		}
 		

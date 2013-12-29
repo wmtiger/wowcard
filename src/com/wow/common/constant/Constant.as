@@ -9,6 +9,9 @@ package com.wow.common.constant
 		public static const CARD_SIZE_SMALL:String = "small";
 		public static const CARD_SIZE_LARGE:String = "large";
 		
+		public static const CARD_IMG_PATH:String = "/assets/images/cards/{0}/{1}.jpg";
+		
+		
 		public function Constant()
 		{
 		}

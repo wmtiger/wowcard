@@ -1,5 +1,7 @@
 package com.wow.common.template
 {
+	import com.wow.common.cfg.CardConfig;
+
 	public class CardTemplate
 	{
 		/**
@@ -15,29 +17,17 @@ package com.wow.common.template
 		 */		
 		public var desc:String;
 		/**
-		 * 牌类型，分为：技能(1)；仆从(2)；装备(3)
+		 * 牌类型，分为：仆从(1)；技能(2)；装备(3)
 		 */		
 		public var type:int;
 		/**
-		 * 种族，分为：人类1；精灵2；兽人3；亡灵4；(动物5；鱼人6；纳珈7...)
+		 * 阵营，分为：1：魏，2：蜀，3：吴，4：黄巾，5：群英
 		 */		
-		public var race:int;
+		public var camp:int;
 		/**
-		 * 关键字，用于检索
+		 * 卡牌图片id
 		 */		
-		public var keywords:String;
-		/**
-		 * 生产此牌需要的金币
-		 */		
-		public var creation:int;
-		/**
-		 * 来源，分为：基本牌1；专家牌2
-		 */		
-		public var from:int;
-		/**
-		 * 品质，分为：免费0；普通1；精良2；传说3；史诗4
-		 */		
-		public var quality:int;
+		public var imgId:int;
 		/**
 		 * 默认使用费用
 		 */		
@@ -51,24 +41,53 @@ package com.wow.common.template
 		 */		
 		public var hp:int;
 		/**
-		 * 牌技能id
+		 * 品质，分为：免费0；普通1；精良2；稀有3；传说4；史诗5
+		 */		
+		public var quality:int;
+		/**
+		 * 关键字，用于检索
+		 */		
+		public var keywords:String;
+		/**
+		 * 生产此牌需要的金币
+		 */		
+		public var creation:int;
+		/**
+		 * 拆分此牌得到的金币
+		 */		
+		public var split:int;
+		/**
+		 * 牌技能id列表（int）
 		 */
-		public var skillId:int;
+		public var skillIds:Array;
 		/**
-		 * 卡牌图片id
+		 * 卡牌图片特效id，没有则为0
 		 */		
-		public var imgId:int;
+		public var imgEffectId:int;
 		/**
-		 * 卡牌特效id，没有则为0
+		 * 卡牌攻击音效id，没有则为0
 		 */		
-		public var effectId:int;
+		public var atkSndId:int;
 		/**
-		 * 卡牌音效id，没有则为0
+		 * 卡牌死亡音效id，没有则为0
 		 */		
-		public var sndId:int;
+		public var deadSndId:int;
+		/**
+		 * 卡牌加入战场音效id，没有则为0
+		 */		
+		public var joinFieldSndId:int;
+		/**
+		 * 卡牌加入战场特效id，没有则为0
+		 */
+		public var joinFieldEffectId:int;
 		
 		public function CardTemplate()
 		{
+		}
+		
+		public static function getTemp(tid:int):CardTemplate
+		{
+			return CardConfig.instance.dict[tid];
 		}
 	}
 }

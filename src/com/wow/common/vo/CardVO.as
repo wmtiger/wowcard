@@ -22,6 +22,10 @@ package com.wow.common.vo
 		 * 当前卡牌的生命值
 		 */		
 		public var hp:int;
+		/**
+		 * 当前状态列表，手牌或者场上的卡，都会有影响，等同于增减益效果列表
+		 */		
+		public var buffs:Array;
 		
 		public function CardVO()
 		{

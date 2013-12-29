@@ -127,7 +127,14 @@ package com.wow.view.cardsmgr
 		
 		private function seeAll_triggeredHandler(event:Event):void
 		{
-			
+			if(event.target['label'] == "SeeAllGroup")
+			{
+				event.target['label'] = "SeeAllCard";
+			}
+			else if(event.target['label'] == "SeeAllCard")
+			{
+				event.target['label'] = "SeeAllGroup";
+			}
 		}
 		
 		private function fight_triggeredHandler(event:Event):void

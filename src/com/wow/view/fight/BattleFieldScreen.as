@@ -1,6 +1,6 @@
 package com.wow.view.fight
 {
-	import com.wow.common.model.CardModel;
+	import com.wow.common.model.BattleCardModel;
 	import com.wow.mgr.BattleMgr;
 	import com.wow.net.SocketCmd;
 	import com.wow.net.SocketService;
@@ -13,8 +13,6 @@ package com.wow.view.fight
 	import feathers.controls.Button;
 	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
-	
-	import flashx.textLayout.tlf_internal;
 	
 	import starling.events.Event;
 	
@@ -34,6 +32,9 @@ package com.wow.view.fight
 		override protected function initializeHandler(event:Event):void
 		{
 			this.layout = new AnchorLayout();
+			
+			startFight();//test
+			return;
 			
 			var sfp:SearchFighterPanel = new SearchFighterPanel();
 			PopUpManager.addPopUp(sfp);
@@ -107,7 +108,7 @@ package com.wow.view.fight
 		
 		private function enemyAI_2():void
 		{
-			var arr:Array = CardModel.instance.getOtherHands();
+			var arr:Array = BattleCardModel.instance.getOtherHands();
 //			trace(arr.length);
 			if(arr.length <= 0)
 			{

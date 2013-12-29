@@ -1,6 +1,6 @@
 package com.wow.view.fight
 {
-	import com.wow.common.model.CardModel;
+	import com.wow.common.model.BattleCardModel;
 	import com.wow.view.comps.CardSmall;
 
 	public class MyBattleField extends BattleField
@@ -35,17 +35,17 @@ package com.wow.view.fight
 		
 		override protected function addHands(num:int = 1, from:int = 0, id:int = -1):void
 		{
-			CardModel.instance.addMyHand(num, from,id);
+			BattleCardModel.instance.addMyHand(num, from,id);
 		}
 		
 		override protected function getHands():Array
 		{
-			return CardModel.instance.getMyHands();
+			return BattleCardModel.instance.getMyHands();
 		}
 		
 		override protected function addField(id:int, from:int = 1):void
 		{
-			CardModel.instance.addMyField(id, from);
+			BattleCardModel.instance.addMyField(id, from);
 		}
 		
 		override public function removeFromArmyField(id:int):void
