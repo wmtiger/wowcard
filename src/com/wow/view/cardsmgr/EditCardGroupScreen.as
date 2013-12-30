@@ -1,12 +1,18 @@
 package com.wow.view.cardsmgr
 {
+	import com.wow.common.model.CardModel;
 	import com.wow.setting.Setting;
+	import com.wow.utils.CardMgrUtil;
 	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
+	import feathers.controls.ButtonGroup;
 	import feathers.controls.List;
+	import feathers.core.IFeathersControl;
+	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
 	import feathers.system.DeviceCapabilities;
 	
 	import starling.core.Starling;
@@ -15,10 +21,13 @@ package com.wow.view.cardsmgr
 	
 	public class EditCardGroupScreen extends WmPanelScreen
 	{
-		private var _list:List;
+		private var _leftList:List;
+		private var _rightList:List;
 		
 		public var selectedCardGroup:Object;
 		private var _backButton:Button;
+		private var _friendButton:Button;
+		private var _buttonGroup:ButtonGroup;
 		
 		public function EditCardGroupScreen()
 		{
@@ -30,9 +39,33 @@ package com.wow.view.cardsmgr
 			this.layout = new AnchorLayout();
 			
 			initHeader();
-//			initBody();
-//			initFooter();
+			initBody();
+			initFooter();
 			
+		}
+		
+		private function initBody():void
+		{
+			_leftList = new List();
+			this._leftList.dataProvider = new ListCollection(CardMgrUtil.getAllCardObjList(CardModel.instance.getCardGroups()[0].cards));
+			this._leftList.isSelectable = true;
+			this._leftList.hasElasticEdges = true;
+			this._leftList.clipContent = false;
+			this._leftList.autoHideBackground = true;
+			this._leftList.itemRendererProperties.labelField = "text";
+			this._leftList.itemRendererProperties.iconSourceField = "icon";
+			this._leftList.itemRendererProperties.iconPosition = Button.ICON_POSITION_LEFT;
+			this._leftList.itemRendererProperties.height = 90;
+			this._leftList.addEventListener(Event.CHANGE, list_changeHandler);
+			this._leftList.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			this.addChild(this._leftList);
+		}
+		
+		private function list_changeHandler(event:Event):void
+		{
+			const selectedIndices:Vector.<int> = this._leftList.selectedIndices;
+			trace("List onChange:", selectedIndices.length > 0 ? selectedIndices : this._leftList.selectedIndex);
+			selectedCardGroup.idx = _leftList.selectedIndex;
 		}
 		
 		private function initHeader():void
@@ -53,6 +86,25 @@ package com.wow.view.cardsmgr
 			}
 			
 			this.headerProperties.title = "" + selectedCardGroup.label;
+		}
+		
+		private function initFooter():void
+		{
+			this._buttonGroup = new ButtonGroup();
+			this._buttonGroup.dataProvider = new ListCollection(
+				[
+					{ label: "编辑卡组", triggered: editCardGroup_triggeredHandler }
+				]);
+			this._buttonGroup.direction = ButtonGroup.DIRECTION_HORIZONTAL;
+			
+			this.footerFactory = function ():IFeathersControl
+			{
+				return _buttonGroup;
+			}
+		}
+		
+		private function editCardGroup_triggeredHandler(e:Event):void
+		{
 			
 		}
 		

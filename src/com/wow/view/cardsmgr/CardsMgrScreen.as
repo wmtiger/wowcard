@@ -1,14 +1,17 @@
 package com.wow.view.cardsmgr
 {
+	import com.wow.common.model.CardModel;
+	import com.wow.common.template.CardTemplate;
+	import com.wow.common.utils.NormalUtil;
 	import com.wow.setting.Setting;
+	import com.wow.themes.UIAssets;
+	import com.wow.utils.CardMgrUtil;
 	
 	import ext.wm.feathers.WmPanelScreen;
 	
 	import feathers.controls.Button;
 	import feathers.controls.ButtonGroup;
 	import feathers.controls.List;
-	import feathers.controls.renderers.DefaultListItemRenderer;
-	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.core.IFeathersControl;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
@@ -62,29 +65,25 @@ package com.wow.view.cardsmgr
 		
 		private function initBody():void
 		{
-			var items:Array = [];
-			for(var i:int = 0; i < 4; i++)
-			{
-				var item:Object = {text: "CardGroup " + (i + 1).toString()};
-				items[i] = item;
-			}
-			items.fixed = true;
 			
 			_list = new List();
-			this._list.dataProvider = new ListCollection(items);
-			this._list.typicalItem = {text: "CardGroup 1000"};
+			this._list.dataProvider = new ListCollection(CardMgrUtil.getCardGroupObjList());
 			this._list.isSelectable = true;
 			//			this._list.allowMultipleSelection = true;// 设置的时候可以多选来删除
 			this._list.hasElasticEdges = true;
 			this._list.clipContent = false;
 			this._list.autoHideBackground = true;
-			this._list.itemRendererFactory = function():IListItemRenderer
-			{
-				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
-				renderer.isQuickHitAreaEnabled = true;
-				renderer.labelField = "text";
-				return renderer;
-			};
+			this._list.itemRendererProperties.labelField = "text";
+			this._list.itemRendererProperties.iconSourceField = "icon";
+			this._list.itemRendererProperties.iconPosition = Button.ICON_POSITION_LEFT;
+			this._list.itemRendererProperties.height = 130;
+//			this._list.itemRendererFactory = function():IListItemRenderer
+//			{
+//				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+//				renderer.isQuickHitAreaEnabled = true;
+//				renderer.labelField = "text";
+//				return renderer;
+//			};
 			this._list.addEventListener(Event.CHANGE, list_changeHandler);
 			this._list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			this.addChild(this._list);
@@ -130,10 +129,14 @@ package com.wow.view.cardsmgr
 			if(event.target['label'] == "SeeAllGroup")
 			{
 				event.target['label'] = "SeeAllCard";
+				this._list.dataProvider = new ListCollection(CardMgrUtil.getCardGroupObjList());
+				this._list.itemRendererProperties.height = 130;
 			}
 			else if(event.target['label'] == "SeeAllCard")
 			{
 				event.target['label'] = "SeeAllGroup";
+				this._list.dataProvider = new ListCollection(CardMgrUtil.getAllCardObjList(CardModel.instance.getAllCards()));
+				this._list.itemRendererProperties.height = 90;
 			}
 		}
 		

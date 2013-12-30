@@ -42,6 +42,8 @@ package com.wow.view.game
 			
 			SocketService.instance.init("192.168.1.102", 8888);
 			CfgUtil.testCardTemp();//test
+			CfgUtil.testCardVO();//test
+			CfgUtil.testCardGroup();//test
 			
 			new WowCardTheme();
 			

@@ -338,8 +338,10 @@ package com.wow.themes
 			FeathersControl.defaultTextRendererFactory = textRendererFactory;
 			FeathersControl.defaultTextEditorFactory = textEditorFactory;
 
-			const regularFontNames:String = "SourceSansPro";
-			const semiboldFontNames:String = "SourceSansProSemibold";
+			const regularFontNames:String = null;
+			const semiboldFontNames:String = null;
+//			const regularFontNames:String = "SourceSansPro";
+//			const semiboldFontNames:String = "SourceSansProSemibold";
 
 			this.headerTextFormat = new TextFormat(semiboldFontNames, Math.round(36 * this.scale), LIGHT_TEXT_COLOR, true);
 
@@ -604,26 +606,26 @@ package com.wow.themes
 		protected function labelInitializer(label:Label):void
 		{
 			label.textRendererProperties.textFormat = this.smallLightTextFormat;
-			label.textRendererProperties.embedFonts = true;
+//			label.textRendererProperties.embedFonts = true;
 		}
 
 		protected function itemRendererAccessoryLabelInitializer(renderer:TextFieldTextRenderer):void
 		{
 			renderer.textFormat = this.smallLightTextFormat;
-			renderer.embedFonts = true;
+//			renderer.embedFonts = true;
 		}
 
 		protected function alertMessageInitializer(renderer:TextFieldTextRenderer):void
 		{
 			renderer.wordWrap = true;
 			renderer.textFormat = this.smallLightTextFormat;
-			renderer.embedFonts = true;
+//			renderer.embedFonts = true;
 		}
 
 		protected function scrollTextInitializer(text:ScrollText):void
 		{
 			text.textFormat = this.smallLightTextFormat;
-			text.embedFonts = true;
+//			text.embedFonts = true;
 			text.paddingTop = text.paddingBottom = text.paddingLeft = 32 * this.scale;
 			text.paddingRight = 36 * this.scale;
 		}
@@ -631,11 +633,11 @@ package com.wow.themes
 		protected function baseButtonInitializer(button:Button):void
 		{
 			button.defaultLabelProperties.textFormat = this.smallUIDarkTextFormat;
-			button.defaultLabelProperties.embedFonts = true;
+//			button.defaultLabelProperties.embedFonts = true;
 			button.disabledLabelProperties.textFormat = this.smallUIDarkDisabledTextFormat;
-			button.disabledLabelProperties.embedFonts = true;
+//			button.disabledLabelProperties.embedFonts = true;
 			button.selectedDisabledLabelProperties.textFormat = this.smallUIDarkDisabledTextFormat;
-			button.selectedDisabledLabelProperties.embedFonts = true;
+//			button.selectedDisabledLabelProperties.embedFonts = true;
 
 			button.paddingTop = button.paddingBottom = 8 * this.scale;
 			button.paddingLeft = button.paddingRight = 16 * this.scale;
@@ -761,11 +763,11 @@ package com.wow.themes
 			button.stateToSkinFunction = skinSelector.updateValue;
 
 			button.defaultLabelProperties.textFormat = this.largeUIDarkTextFormat;
-			button.defaultLabelProperties.embedFonts = true;
+//			button.defaultLabelProperties.embedFonts = true;
 			button.disabledLabelProperties.textFormat = this.largeUIDisabledTextFormat;
-			button.disabledLabelProperties.embedFonts = true;
+//			button.disabledLabelProperties.embedFonts = true;
 			button.selectedDisabledLabelProperties.textFormat = this.largeUIDisabledTextFormat;
-			button.selectedDisabledLabelProperties.embedFonts = true;
+//			button.selectedDisabledLabelProperties.embedFonts = true;
 
 			button.paddingTop = button.paddingBottom = 8 * this.scale;
 			button.paddingLeft = button.paddingRight = 16 * this.scale;
@@ -826,13 +828,13 @@ package com.wow.themes
 			tab.selectedDisabledSkin = selectedDisabledSkin;
 
 			tab.defaultLabelProperties.textFormat = this.smallUILightTextFormat;
-			tab.defaultLabelProperties.embedFonts = true;
+//			tab.defaultLabelProperties.embedFonts = true;
 			tab.defaultSelectedLabelProperties.textFormat = this.smallUIDarkTextFormat;
-			tab.defaultSelectedLabelProperties.embedFonts = true;
+//			tab.defaultSelectedLabelProperties.embedFonts = true;
 			tab.disabledLabelProperties.textFormat = this.smallUIDarkDisabledTextFormat;
-			tab.disabledLabelProperties.embedFonts = true;
+//			tab.disabledLabelProperties.embedFonts = true;
 			tab.selectedDisabledLabelProperties.textFormat = this.smallUIDarkDisabledTextFormat;
-			tab.selectedDisabledLabelProperties.embedFonts = true;
+//			tab.selectedDisabledLabelProperties.embedFonts = true;
 
 			tab.paddingTop = tab.paddingBottom = 8 * this.scale;
 			tab.paddingLeft = tab.paddingRight = 16 * this.scale;
@@ -875,11 +877,11 @@ package com.wow.themes
 			renderer.stateToSkinFunction = skinSelector.updateValue;
 
 			renderer.defaultLabelProperties.textFormat = this.largeLightTextFormat;
-			renderer.defaultLabelProperties.embedFonts = true;
+//			renderer.defaultLabelProperties.embedFonts = true;
 			renderer.downLabelProperties.textFormat = this.largeDarkTextFormat;
-			renderer.downLabelProperties.embedFonts = true;
+//			renderer.downLabelProperties.embedFonts = true;
 			renderer.defaultSelectedLabelProperties.textFormat = this.largeDarkTextFormat;
-			renderer.defaultSelectedLabelProperties.embedFonts = true;
+//			renderer.defaultSelectedLabelProperties.embedFonts = true;
 
 			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_LEFT;
 			renderer.paddingTop = renderer.paddingBottom = 8 * this.scale;
@@ -918,9 +920,9 @@ package com.wow.themes
 			renderer.defaultIcon = defaultIcon;
 
 			renderer.defaultLabelProperties.textFormat = this.largeLightTextFormat;
-			renderer.defaultLabelProperties.embedFonts = true;
+//			renderer.defaultLabelProperties.embedFonts = true;
 			renderer.downLabelProperties.textFormat = this.largeDarkTextFormat;
-			renderer.downLabelProperties.embedFonts = true;
+//			renderer.downLabelProperties.embedFonts = true;
 
 			renderer.itemHasIcon = false;
 			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_LEFT;
@@ -950,11 +952,11 @@ package com.wow.themes
 			renderer.stateToSkinFunction = skinSelector.updateValue;
 
 			renderer.defaultLabelProperties.textFormat = this.largeLightTextFormat;
-			renderer.defaultLabelProperties.embedFonts = true;
+//			renderer.defaultLabelProperties.embedFonts = true;
 			renderer.downLabelProperties.textFormat = this.largeDarkTextFormat;
-			renderer.downLabelProperties.embedFonts = true;
+//			renderer.downLabelProperties.embedFonts = true;
 			renderer.defaultSelectedLabelProperties.textFormat = this.largeDarkTextFormat;
-			renderer.defaultSelectedLabelProperties.embedFonts = true;
+//			renderer.defaultSelectedLabelProperties.embedFonts = true;
 
 			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_LEFT;
 			renderer.paddingTop = renderer.paddingBottom = 8 * this.scale;
@@ -998,7 +1000,7 @@ package com.wow.themes
 
 			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_LEFT;
 			renderer.contentLabelProperties.textFormat = this.smallUILightTextFormat;
-			renderer.contentLabelProperties.embedFonts = true;
+//			renderer.contentLabelProperties.embedFonts = true;
 			renderer.paddingTop = renderer.paddingBottom = 4 * this.scale;
 			renderer.paddingLeft = renderer.paddingRight = 16 * this.scale;
 			renderer.minWidth = renderer.minHeight = 44 * this.scale;
@@ -1014,7 +1016,7 @@ package com.wow.themes
 
 			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_CENTER;
 			renderer.contentLabelProperties.textFormat = this.smallLightTextFormat;
-			renderer.contentLabelProperties.embedFonts = true;
+//			renderer.contentLabelProperties.embedFonts = true;
 			renderer.paddingTop = renderer.paddingBottom = 4 * this.scale;
 			renderer.paddingLeft = renderer.paddingRight = 16 * this.scale;
 			renderer.minWidth = renderer.minHeight = 44 * this.scale;
@@ -1031,7 +1033,7 @@ package com.wow.themes
 
 			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_LEFT;
 			renderer.contentLabelProperties.textFormat = this.smallUILightTextFormat;
-			renderer.contentLabelProperties.embedFonts = true;
+//			renderer.contentLabelProperties.embedFonts = true;
 			renderer.paddingTop = renderer.paddingBottom = 4 * this.scale;
 			renderer.paddingLeft = renderer.paddingRight = 32 * this.scale;
 			renderer.minWidth = renderer.minHeight = 66 * this.scale;
@@ -1048,7 +1050,7 @@ package com.wow.themes
 
 			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_CENTER;
 			renderer.contentLabelProperties.textFormat = this.smallLightTextFormat;
-			renderer.contentLabelProperties.embedFonts = true;
+//			renderer.contentLabelProperties.embedFonts = true;
 			renderer.paddingTop = renderer.paddingBottom = 4 * this.scale;
 			renderer.paddingLeft = renderer.paddingRight = 32 * this.scale;
 			renderer.minWidth = renderer.minHeight = 66 * this.scale;
@@ -1074,11 +1076,11 @@ package com.wow.themes
 			radio.stateToIconFunction = iconSelector.updateValue;
 
 			radio.defaultLabelProperties.textFormat = this.smallUILightTextFormat;
-			radio.defaultLabelProperties.embedFonts = true;
+//			radio.defaultLabelProperties.embedFonts = true;
 			radio.disabledLabelProperties.textFormat = this.smallUILightDisabledTextFormat;
-			radio.disabledLabelProperties.embedFonts = true;
+//			radio.disabledLabelProperties.embedFonts = true;
 			radio.selectedDisabledLabelProperties.textFormat = this.smallUILightDisabledTextFormat;
-			radio.selectedDisabledLabelProperties.embedFonts = true;
+//			radio.selectedDisabledLabelProperties.embedFonts = true;
 
 			radio.gap = 8 * this.scale;
 			radio.minTouchWidth = radio.minTouchHeight = 88 * this.scale;
@@ -1101,11 +1103,11 @@ package com.wow.themes
 			check.stateToIconFunction = iconSelector.updateValue;
 
 			check.defaultLabelProperties.textFormat = this.smallUILightTextFormat;
-			check.defaultLabelProperties.embedFonts = true;
+//			check.defaultLabelProperties.embedFonts = true;
 			check.disabledLabelProperties.textFormat = this.smallUILightDisabledTextFormat;
-			check.disabledLabelProperties.embedFonts = true;
+//			check.disabledLabelProperties.embedFonts = true;
 			check.selectedDisabledLabelProperties.textFormat = this.smallUILightDisabledTextFormat;
-			check.selectedDisabledLabelProperties.embedFonts = true;
+//			check.selectedDisabledLabelProperties.embedFonts = true;
 
 			check.gap = 8 * this.scale;
 			check.minTouchWidth = check.minTouchHeight = 88 * this.scale;
@@ -1142,9 +1144,9 @@ package com.wow.themes
 			toggle.trackLayoutMode = ToggleSwitch.TRACK_LAYOUT_MODE_SINGLE;
 
 			toggle.defaultLabelProperties.textFormat = this.smallUILightTextFormat;
-			toggle.defaultLabelProperties.embedFonts = true;
+//			toggle.defaultLabelProperties.embedFonts = true;
 			toggle.onLabelProperties.textFormat = this.smallUISelectedTextFormat;
-			toggle.onLabelProperties.embedFonts = true;
+//			toggle.onLabelProperties.embedFonts = true;
 		}
 
 		protected function numericStepperInitializer(stepper:NumericStepper):void
@@ -1197,7 +1199,7 @@ package com.wow.themes
 			input.textEditorProperties.color = LIGHT_TEXT_COLOR;
 
 			input.promptProperties.textFormat = this.smallLightTextFormat;
-			input.promptProperties.embedFonts = true;
+//			input.promptProperties.embedFonts = true;
 		}
 
 		protected function textInputInitializer(input:TextInput):void
@@ -1241,7 +1243,7 @@ package com.wow.themes
 			input.isEditable = false;
 			input.textEditorFactory = stepperTextEditorFactory;
 			input.textEditorProperties.textFormat = this.smallLightTextFormatCentered;
-			input.textEditorProperties.embedFonts = true;
+//			input.textEditorProperties.embedFonts = true;
 		}
 
 		protected function pageIndicatorInitializer(pageIndicator:PageIndicator):void
@@ -1290,7 +1292,7 @@ package com.wow.themes
 			backgroundSkin.width = backgroundSkin.height = 88 * this.scale;
 			header.backgroundSkin = backgroundSkin;
 			header.titleProperties.textFormat = this.headerTextFormat;
-			header.titleProperties.embedFonts = true;
+//			header.titleProperties.embedFonts = true;
 		}
 
 		protected function headerWithoutBackgroundInitializer(header:Header):void
@@ -1301,7 +1303,7 @@ package com.wow.themes
 			header.paddingLeft = header.paddingRight = 18 * this.scale;
 
 			header.titleProperties.textFormat = this.headerTextFormat;
-			header.titleProperties.embedFonts = true;
+//			header.titleProperties.embedFonts = true;
 		}
 
 		protected function pickerListInitializer(list:PickerList):void

@@ -31,7 +31,7 @@ package com.wow.common.utils
 		
 		public static function getCardImgByTid(tid:int, type:String = "small"):String
 		{
-			return formatString(Constant.CARD_IMG_PATH, type,tid);
+			return formatString(Constant.CARD_IMG_PATH, type, tid);
 		}
 	}
 }

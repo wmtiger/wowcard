@@ -1,5 +1,6 @@
 package com.wow.common.model
 {
+	import com.wow.common.vo.CardGroupVO;
 	import com.wow.common.vo.CardVO;
 
 	public class CardModel
@@ -30,6 +31,26 @@ package com.wow.common.model
 		public function resetAllCards(arr:Array):void
 		{
 			_allCards = arr;
+		}
+		
+		public function getAllCards():Array
+		{
+			return _allCards;
+		}
+		
+		public function addCardGroup(vo:CardGroupVO):void
+		{
+			_cardGroups.push(vo);
+		}
+		
+		public function resetCardGroups(arr:Array):void
+		{
+			_cardGroups = arr;
+		}
+		
+		public function getCardGroups():Array
+		{
+			return _cardGroups;
 		}
 
 	}

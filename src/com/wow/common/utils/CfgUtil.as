@@ -3,12 +3,22 @@ package com.wow.common.utils
 	import com.wow.common.cfg.CardConfig;
 	import com.wow.common.model.CardModel;
 	import com.wow.common.template.CardTemplate;
+	import com.wow.common.vo.CardGroupVO;
 	import com.wow.common.vo.CardVO;
 
 	public class CfgUtil
 	{
 		public function CfgUtil()
 		{
+		}
+		
+		public static function testCardGroup():void
+		{
+			var vo:CardGroupVO = new CardGroupVO();
+			vo.id = 1;
+			vo.name = "测试卡组";
+			vo.cards = CardModel.instance.getAllCards().slice(0, 30);
+			CardModel.instance.addCardGroup(vo);
 		}
 		
 		public static function testCardVO():void
@@ -23,13 +33,13 @@ package com.wow.common.utils
 		}
 		private static function makeCardVO(id:int, tid:int, cost:int = 0, atk:int = 0, hp:int = 0, buffs:Array = null):CardVO
 		{
-//			var temp:CardTemplate = CardTemplate.getTemp(tid);
+			var temp:CardTemplate = CardTemplate.getTemp(tid);
 			var vo:CardVO = new CardVO();
 			vo.id = id;
 			vo.tid = tid;
-			vo.cost = cost;
-			vo.atk = atk;
-			vo.hp = hp;
+			vo.cost = temp.cost;
+			vo.atk = temp.atk;
+			vo.hp = temp.hp;
 			vo.buffs = buffs;
 			return vo;
 		}
