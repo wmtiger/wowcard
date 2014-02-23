@@ -30,7 +30,7 @@ package com.wow.view.comps
 		
 		override protected function clickCardSmall():void
 		{
-			
+			trace("click card here");
 		}
 		
 		override protected function setImgXY():void

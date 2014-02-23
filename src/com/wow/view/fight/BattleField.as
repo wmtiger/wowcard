@@ -1,6 +1,7 @@
 package com.wow.view.fight
 {
 	import com.wow.common.constant.Constant;
+	import com.wow.view.comps.BattleHead;
 	import com.wow.view.comps.CardInField;
 	import com.wow.view.comps.CardSmall;
 	
@@ -12,6 +13,7 @@ package com.wow.view.fight
 	{
 		protected var _hands:HandCards;
 		protected var _field:ArmyField;
+		protected var _head:BattleHead;
 		
 		public function BattleField()
 		{
@@ -36,6 +38,9 @@ package com.wow.view.fight
 			
 			_field = new ArmyField(width, 80);
 			addChild(_field);
+			
+			_head = new BattleHead();
+			addChild(_head);
 		}
 		
 		protected function flushHands():void
